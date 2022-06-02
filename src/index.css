@@ -1,3 +1,7 @@
+html, body {
+  height: 100%;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +14,13 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/*
+ * Remove margin and padding from all elements.
+ * If some element needs margin or padding it has to be added straight in the CSS tag of the element.
+*/
+* {
+  margin: 0;
+  padding: 0;
 }

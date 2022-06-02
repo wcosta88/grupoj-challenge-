@@ -1,24 +1,23 @@
 import logo from './logo.svg';
 import './App.css';
+import WelcomeMessage from "./components/WelcomeMessage";
+import LoginForm from "./components/LoginForm";
+import NewUserForm from "./components/NewUserForm";
+import {Fragment, useState} from 'react';
+import { Route, Switch } from 'react-router-dom'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Fragment>
+          <Switch>
+              <Route path="/" exact>
+                  <LoginForm />
+              </Route>
+              <Route path="/newuser" exact>
+                  <NewUserForm />
+              </Route>
+          </Switch>
+      </Fragment>
   );
 }
 

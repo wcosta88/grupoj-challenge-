@@ -36,3 +36,16 @@
     transform: rotate(360deg);
   }
 }
+
+#root {
+  height: 100%;
+  background-color: #ffffff;
+}
+
+.Main-Container {
+
+}
+
+.Sub-Container {
+  padding: 50px
+}
