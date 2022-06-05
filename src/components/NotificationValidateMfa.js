@@ -35,10 +35,10 @@ const ModalOverlay = (props) => {
             <div>
                 <form onSubmit={onSubmitHandler}>
                     <div className={classes.control}>
-                        <label htmlFor="mfacode">QR Code</label>
                         <input id="mfacode"
                                value={enteredCode}
                                onChange={codeChangeHandler}/>
+                        <label htmlFor="mfacode">Chave de Autenticação</label>
                     </div>
                     <div className={classes.actions}>
                         <Button type="submit" className={classes.btn}>

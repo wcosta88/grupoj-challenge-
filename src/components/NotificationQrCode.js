@@ -33,13 +33,15 @@ const ModalOverlay = (props) => {
                 <p>{props.message}</p>
             </div>
             <div>
-                <QrCode qrCode={props.qrCode} />
+                <div className={classes.qrcode}>
+                    <QrCode qrCode={props.qrCode} />
+                </div>
                 <form onSubmit={onSubmitHandler}>
                     <div className={classes.control}>
-                        <label htmlFor="qrcode">QR Code</label>
                         <input id="qrcode"
                                value={enteredCode}
                                onChange={codeChangeHandler}/>
+                        <label htmlFor="qrcode">Código de Autenticação</label>
                     </div>
                     <div className={classes.actions}>
                         <Button type="submit" className={classes.btn}>

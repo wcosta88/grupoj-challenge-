@@ -4,4 +4,24 @@
     padding: 3rem;
     margin: 2rem auto;
     text-align: center;
+    background-color: white;
+}
+
+.menuContainer {
+    display: flex;
+    flex-flow: row-reverse;
+}
+
+.mainMenu {
+    display: flex;
+    justify-content: flex-end;
+}
+
+ul {
+    list-style: none;
+}
+
+.tokendiv {
+    overflow: auto;
+    background-color: white;
 }

@@ -1,4 +1,4 @@
-const URL_KEY = 'z0dmzyn65s'
+const URL_KEY = 'de4qzasybx'
 const URL_NEWUSER = `http://localhost:4566/restapis/${URL_KEY}/test/_user_request_/usuario` // 1
 const URL_CONFIRMUSER = `http://localhost:4566/restapis/${URL_KEY}/test/_user_request_/usuario_confirmacao` // 2
 const URL_SIGIN = `http://localhost:4566/restapis/${URL_KEY}/test/_user_request_/sign_in` // 3
@@ -7,6 +7,8 @@ const URL_CheckQRCode = `http://localhost:4566/restapis/${URL_KEY}/test/_user_re
 const URL_ValidateMFA = `http://localhost:4566/restapis/${URL_KEY}/test/_user_request_/validate_mfa` // 6
 const URL_CheckToken = `http://localhost:4566/restapis/${URL_KEY}/test/_user_request_/validation_token` //7
 const URL_SIGOUT = `http://localhost:4566/restapis/${URL_KEY}/test/_user_request_/sign_out`
+const URL_FORGOTPWD = `http://localhost:4566/restapis/${URL_KEY}/test/_user_request_/forgot_password`
+const URL_CONFIRMPWD = `http://localhost:4566/restapis/${URL_KEY}/test/_user_request_/confirmation_forgot_password`
 
 
 const addUserContent = {
@@ -43,4 +45,5 @@ const validatesMFA = {
 }
 
 export {URL_NEWUSER, URL_CONFIRMUSER, URL_SIGIN, URL_ValidateMFA, URL_GetQRCode, URL_CheckQRCode, URL_CheckToken,
-    URL_SIGOUT, addUserContent, confirmUserContent, userCredentials, qrCodeConfirmation, validatesMFA}
+    URL_SIGOUT, addUserContent, confirmUserContent, userCredentials, qrCodeConfirmation, validatesMFA, URL_FORGOTPWD,
+    URL_CONFIRMPWD}

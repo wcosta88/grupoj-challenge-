@@ -1,0 +1,55 @@
+.header {
+    background: #039be5;
+    padding: 1rem;
+}
+
+.header h2 {
+    margin: 0;
+    color: white;
+}
+
+.content {
+    padding: 1rem;
+}
+
+.control > input {
+    border-bottom: 1px solid #0590CE;
+    background: transparent;
+    color: #000000;
+    margin-bottom: 5px;
+    margin-top: 12px;
+    font-size: 30px;
+    width: 100%;
+    outline: none;
+    padding-bottom: 0;
+    font-family: "CircularAirPro-Book";
+}
+
+.control > label {
+    margin-bottom: 10px;
+}
+
+.control.invalid input {
+    border-color: #ff5656;
+    border-bottom-width: 3px;
+    color: #ff5656;
+}
+
+input {
+    border: none;
+}
+
+.actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+@media (min-width: 768px) {
+    .control {
+        align-items: center;
+        flex-direction: row;
+    }
+
+}

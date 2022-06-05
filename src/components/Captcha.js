@@ -12,14 +12,14 @@ class Captcha extends Component {
         let user_captcha = document.getElementById('user_captcha_input').value;
 
         if (validateCaptcha(user_captcha)===true) {
-            alert('Captcha Validado');
+            this.props.onValidate(true)
             loadCaptchaEnginge(6);
             document.getElementById('user_captcha_input').value = "";
 
         }
 
         else {
-            alert('Captcha Invalido');
+            this.props.onValidate(false)
             document.getElementById('user_captcha_input').value = "";
         }
     };

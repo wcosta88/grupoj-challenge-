@@ -9,7 +9,7 @@ import QrCode from "./QrCode";
 import React from "react";
 
 const Backdrop = (props) => {
-    return <div className={classes.backdrop} />;
+    return <div className={classes.backdrop}/>;
 };
 
 const ModalOverlay = (props) => {

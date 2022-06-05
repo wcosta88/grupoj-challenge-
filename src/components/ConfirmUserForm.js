@@ -4,6 +4,8 @@ import {URL_CONFIRMUSER, URL_NEWUSER} from "../httpClient/HttpConstants";
 import {headers, isResponseSuccessul, parseHttpBody} from "../httpClient/HttpHelper";
 import Notification from "./Notification";
 import Card from "./Card";
+import classes from "./ConfirmUserForm.module.css";
+import Button from "./Button";
 
 
 function ConfirmUserForm(props) {
@@ -43,12 +45,12 @@ function ConfirmUserForm(props) {
     return (
         <div>
             <form onSubmit={submitHandler}>
-                <div>
-                    <label>Codigo de Confirmacao </label>
+                <div className={classes.control}>
                     <input type='text' value={code} onChange={coderHandler}/>
+                    <label>Codigo de Confirmacao </label>
                 </div>
-                <div>
-                    <button type={'submit'}>OK</button>
+                <div className={classes.control}>
+                    <Button type={'submit'}>OK</Button>
                 </div>
             </form>
             {success && <Card ><p>{success}</p></Card>}

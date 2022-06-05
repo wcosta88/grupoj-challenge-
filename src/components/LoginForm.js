@@ -1,6 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import httpPostReq from "../httpClient/HttpPost";
-import './LoginForm.module.css'
+import React, {Fragment, useEffect, useState} from 'react';
+import classes from './LoginForm.module.css'
 import {URL_CheckQRCode, URL_GetQRCode, URL_SIGIN, URL_ValidateMFA} from "../httpClient/HttpConstants";
 import {headers, isResponseSuccessul, parseHttpBody} from "../httpClient/HttpHelper";
 import MainHeader from "./MainHeader";
@@ -10,6 +9,11 @@ import Notification from "./Notification";
 import NotificationQrCode from "./NotificationQrCode";
 import {httpGetQrCode} from "../httpClient/HttpGet";
 import NotificationMfa from "./NotificationValidateMfa";
+import Logo from '../LogoPanWhite.svg'
+import LoginV2 from "./LoginV2";
+import ButtonOthers from "./ButtonOthers";
+import {Link} from "react-router-dom";
+
 
 
 function LoginForm(props) {
@@ -23,6 +27,7 @@ function LoginForm(props) {
     const [userName, setUserName] = useState();
     const [isError, setIsError] = useState();
     const [errorMessage, setErrorMessage] = useState();
+    const [tokenMessage, setTokenMessage] = useState();
 
     const loginHandler = async (email, password) => {
         const response = await fetch(URL_SIGIN,{
@@ -43,6 +48,7 @@ function LoginForm(props) {
                 let responseQrCode = await httpGetQrCode(bodyContent.data.session)
                 if(responseQrCode.ok) {
                     let bodyContentQrCode = await responseQrCode.json()
+                    console.log(bodyContentQrCode)
                     setQrCode(bodyContentQrCode.data.codigo_qr_code)
                     setSessionId(bodyContentQrCode.data.session)
                 } else {
@@ -121,6 +127,8 @@ function LoginForm(props) {
             }
         });
         if(response.ok) {
+            let bodyContent = await response.json()
+            setTokenMessage(bodyContent)
             setIsLoggedIn(true)
             setValidateMfa(false)
         } else {
@@ -131,9 +139,36 @@ function LoginForm(props) {
 
     return (
       <React.Fragment>
-          <MainHeader isAuthenticated={isLoggedIn} onLogout={logoutHandler}/>
-          <main>
-              {!isLoggedIn && <Login onLogin={loginHandler} />}
+          {/*<MainHeader isAuthenticated={isLoggedIn} onLogout={logoutHandler}/>*/}
+          <main className={classes.wrapper}>
+              <div className={classes.superiorContent}>
+                  {isLoggedIn && <Home token={tokenMessage} onLogout={logoutHandler} />}
+                  {!isLoggedIn &&
+                      <Fragment>
+                          <div id='logo-box'>
+                              <img className={classes.logo} src={Logo}/>
+                          </div>
+                          <div className={classes.loginMessage}>
+                              <h1>Para Acessar</h1>
+                              <h1>o Pan Online, precisamos</h1>
+                              <h1>de um usuário válido.</h1>
+                          </div>
+                      </Fragment>
+                  }
+              </div>
+              <div className={classes.inferiorContent}>
+                  {!isLoggedIn && <LoginV2 onLogin={loginHandler} />}
+                  {registerMfa && <NotificationQrCode title={"Necessário cadastrar um MFA para prosseguir"}
+                                                      message={"Use o QR Code para cadastrar o seu MFA"} qrCode={qrCode} onConfirmMfa={confirmMfaHandler} />}
+                  {validateMfa && <NotificationMfa title={"Autenticação"}
+                                                   message={"Entre sua chave MFA e clique OK"} onConfirmMfa={confirmMfa}/>}
+                  {isError && <Notification message={errorMessage} title={'ERRO!'} color={'red'} onConfirm={confimrHandler}/>}
+
+              </div>
+              {!isLoggedIn && <div className={classes.newUser}>
+                  <ButtonOthers><Link to="/newuser">Cadastrar novo usuário</Link></ButtonOthers>
+              </div>}
+              {/*!isLoggedIn && <Login onLogin={loginHandler} />}
               {isLoggedIn && <Home onLogout={logoutHandler} />}
               {registerMfa && <NotificationQrCode title={"Necessário cadastrar um MFA para prosseguir"}
                                              message={"Use o QR Code para cadastrar o seu MFA"} qrCode={qrCode} onConfirmMfa={confirmMfaHandler} />}
@@ -141,7 +176,7 @@ function LoginForm(props) {
                                                      message={"Confirmação de criação de mfa para o usuário realizada com sucesso"} onConfirm={cleanState} />}
               {validateMfa && <NotificationMfa title={"Chave MFA"}
                                                message={"Entre sua chave MFA e clique OK"} onConfirmMfa={confirmMfa}/>}
-              {isError && <Notification message={errorMessage} title={'ERRO!'} color={'red'} onConfirm={confimrHandler}/>}
+              {isError && <Notification message={errorMessage} title={'ERRO!'} color={'red'} onConfirm={confimrHandler}/>*/}
           </main>
       </React.Fragment>
     );
