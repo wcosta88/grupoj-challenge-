@@ -47,7 +47,7 @@ function ConfirmUserForm(props) {
             <form onSubmit={submitHandler}>
                 <div className={classes.control}>
                     <input type='text' value={code} onChange={coderHandler}/>
-                    <label>Codigo de Confirmacao </label>
+                    <label>Codigo de Confirmação </label>
                 </div>
                 <div className={classes.control}>
                     <Button type={'submit'}>OK</Button>

@@ -6,6 +6,7 @@ import {useState} from "react";
 import {URL_CONFIRMPWD, URL_FORGOTPWD, URL_SIGIN} from "../httpClient/HttpConstants";
 import {headers} from "../httpClient/HttpHelper";
 import {httpGetQrCode} from "../httpClient/HttpGet";
+import VirtualKeyBoard from "./VirtualKeyBoard";
 
 
 const Backdrop = (props) => {
@@ -13,6 +14,16 @@ const Backdrop = (props) => {
 };
 
 const ModalOverlay = (props) => {
+    const [virtualKeyBoard, setVirtualKeyBoard] = useState(false);
+
+    const showVirtualKeyBoard = (event) => {
+        setVirtualKeyBoard(true);
+    }
+
+    const hideVirtualKeyBoard = (event) => {
+        setVirtualKeyBoard(false);
+    }
+
     return (
         <Fragment>
         {!props.isForgotPwd && <div className={classes.modal}>
@@ -75,6 +86,7 @@ const ModalOverlay = (props) => {
                                 id="code"
                                 value={props.valueCode}
                                 onChange={props.onChangeCode}
+                                onFocus={hideVirtualKeyBoard}
                             />
                             <label htmlFor="code">Código</label>
                         </div>
@@ -82,11 +94,13 @@ const ModalOverlay = (props) => {
                             <input
                                 type="password"
                                 id="password"
-                                value={props.password}
+                                value={props.valuePassword}
                                 onChange={props.onChangePwd}
+                                onFocus={showVirtualKeyBoard}
                             />
                             <label htmlFor="password">Senha</label>
                         </div>
+                        {virtualKeyBoard && <div className={classes.vkeyboard}><VirtualKeyBoard onPassword={props.onChangePwd}></VirtualKeyBoard></div>}
                         <div className={classes.actions}>
                             <Button type="submit">OK</Button>
                         </div>
@@ -113,8 +127,8 @@ function NotificationForgotPassword(props) {
         setEnteredCode(event.target.value);
     };
 
-    const codePasswordHandler = (event) => {
-        setEnteredPassword(event.target.value);
+    const codePasswordHandler = (input) => {
+        setEnteredPassword(input);
     };
 
     const submitHandler = async (event) => {
@@ -135,12 +149,16 @@ function NotificationForgotPassword(props) {
             setMessage(bodyContent.data.message)
             setForgotPwd(true)
         }
+        if(!response.ok) {
+            let bodyContent = await response.json();
+            console.log(bodyContent)
+        }
 
     }
 
     const onSubmitPwdConfirmation = async(event) => {
         event.preventDefault();
-
+        console.log(enteredCode)
         const response = await fetch(URL_CONFIRMPWD,{
             method: 'POST',
             body: JSON.stringify({
@@ -158,6 +176,11 @@ function NotificationForgotPassword(props) {
             setMessage(bodyContent.data.message)
             setConfirmPwd(true)
             setForgotPwd(false)
+        }
+
+        if(!response.ok) {
+            let bodyContent = await response.json();
+            console.log(bodyContent)
         }
     }
 

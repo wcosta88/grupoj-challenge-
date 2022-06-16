@@ -1,4 +1,4 @@
-const URL_KEY = 'de4qzasybx'
+const URL_KEY = 'i2aago6ylg'
 const URL_NEWUSER = `http://localhost:4566/restapis/${URL_KEY}/test/_user_request_/usuario` // 1
 const URL_CONFIRMUSER = `http://localhost:4566/restapis/${URL_KEY}/test/_user_request_/usuario_confirmacao` // 2
 const URL_SIGIN = `http://localhost:4566/restapis/${URL_KEY}/test/_user_request_/sign_in` // 3
